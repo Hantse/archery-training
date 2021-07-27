@@ -1,0 +1,28 @@
+name: stack-dev
+
+extensions:
+- name: zipkin
+# - name: seq
+#   logPath: ./.logs
+
+network: archery-training-services
+namespace: archery-training-services
+
+services:
+- name: service-api
+  project: src/services/Service.API/Service.API.csproj
+  bindings:
+  - port: 5000
+    name: http
+  - port: 5001
+    name: https
+    protocol: https         
+  env:
+  - name: ASPNETCORE_ENVIRONMENT
+    value: Local
+  - name: KeyVaultName
+    value: wowguildepic-dev
+  - name: KeyVaultSecret
+    value: 6k-Cir_eASgF86WWQ.7_gu26JqL4712kn.
+  - name: KeyClientId
+    value: 93fea148-3767-4e6f-9644-5ec066abdd52

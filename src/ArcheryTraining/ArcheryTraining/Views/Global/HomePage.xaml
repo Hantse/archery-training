@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ArcheryTraining.Views.Global.HomePage"
+             xmlns:component="clr-namespace:ArcheryTraining.Components"
+             Title="Sessions">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="New session"
+                 Order="Primary"
+                 Priority="0" Command="{Binding NewSessionCommand, Mode=TwoWay}" />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IsVisible="{Binding HasValue}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+
+                    <Grid Margin="20,10" HeightRequest="135" IsVisible="{Binding HasActive}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="3" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <Label FontSize="Title" Text="Active session" />
+                        <ContentView BackgroundColor="#007aff" Grid.Row="1" WidthRequest="80" HorizontalOptions="Start"  />
+                        <component:SessionItem Grid.Row="2" BindingContext="{Binding Path=Active, Mode=TwoWay}" />
+                    </Grid>
+
+                    <Grid Margin="20,10" Grid.Row="2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="3" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <Label FontSize="Title" Text="Last sessions" />
+                        <ContentView BackgroundColor="#007aff" Grid.Row="1" WidthRequest="80" HorizontalOptions="Start"  />
+                        <ListView Grid.Row="2" ItemsSource="{Binding Path=History}"  
+                          IsPullToRefreshEnabled="true"
+                          SelectionMode="None"
+                          VerticalOptions="FillAndExpand" 
+                          HorizontalOptions="FillAndExpand"
+                          CachingStrategy="RecycleElementAndDataTemplate"
+                          HasUnevenRows="true" 
+                          SeparatorVisibility="None"
+                          ItemTapped="ShowSession_Tapped">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Grid Margin="5">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="40" />
+                                                <ColumnDefinition Width="auto" />
+                                                <ColumnDefinition Width="auto" />
+                                                <ColumnDefinition Width="auto" />
+                                                <ColumnDefinition Width="auto" />
+                                                <ColumnDefinition Width="auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="2" />
+                                            </Grid.RowDefinitions>
+                                            <Image Source="target.png" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
+                                            <Grid Grid.Column="1" Grid.Row="0" Margin="5">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="*"/>
+                                                </Grid.RowDefinitions>
+                                                <Label VerticalTextAlignment="Center"  VerticalOptions="Center" Text="{Binding DateOf}" />
+                                                <Label VerticalTextAlignment="Center"  VerticalOptions="Center" Grid.Row="1" Text="{Binding TimeOf}" />
+                                            </Grid>
+                                            <Label Margin="5" Grid.RowSpan="2" FontSize="Medium" VerticalTextAlignment="Center" Grid.Column="2" Text="{Binding Distance}" />
+                                            <Label Margin="5" Grid.RowSpan="2" Grid.Column="3" Text="{Binding Set}" />
+                                            <Label Margin="5" Grid.RowSpan="2" Grid.Column="4" Text="{Binding Total}" />
+                                            <Label Margin="5" Grid.RowSpan="2" Grid.Column="5" Text="{Binding RatioArrow}" />
+                                        </Grid>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
+                </Grid>
+
+                <StackLayout VerticalOptions="FillAndExpand" Margin="50" IsVisible="{Binding DisplayOnboard}">
+                    <Image Source="target.png" VerticalOptions="CenterAndExpand" HorizontalOptions="Center" Margin="20" />
+                    <Button Text="New session" VerticalOptions="End" Margin="20, 10" FontSize="Medium" Command="{Binding NewSessionCommand, Mode=TwoWay}" />
+                </StackLayout>
+            </StackLayout>
+            <StackLayout BackgroundColor="#70303F9F" IsVisible="{Binding LoadingInProgress}">
+            <ActivityIndicator HorizontalOptions="CenterAndExpand" HeightRequest="80" WidthRequest="80" VerticalOptions="CenterAndExpand"
+                               IsRunning="{Binding LoadingInProgress}" />
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

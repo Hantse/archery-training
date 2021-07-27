@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ArcheryTraining.Views.Global.FlyoutContent"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit">
+    <StackLayout Padding="25" BackgroundColor="#2A2A2A">
+        <xct:AvatarView HorizontalOptions="Center" Text="PG" VerticalOptions="Center" Size="120" />
+    </StackLayout>
+</ContentView>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:account="clr-namespace:ArcheryTraining.Views.Account"
+       xmlns:global="clr-namespace:ArcheryTraining.Views.Global"
+       xmlns:session="clr-namespace:ArcheryTraining.Views.Session"
+       Title="Archery Training"
+       x:Class="ArcheryTraining.AppShell"
+       FlyoutBehavior="Flyout"
+       Shell.NavBarIsVisible="true"
+       Shell.NavBarHasShadow="true">
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Style x:Key="BaseStyle" TargetType="Element">
+                <Setter Property="Shell.BackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="Shell.ForegroundColor" Value="White" />
+                <Setter Property="Shell.TitleColor" Value="White" />
+                <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
+                <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
+                <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="Shell.TabBarForegroundColor" Value="White"/>
+                <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF"/>
+                <Setter Property="Shell.TabBarTitleColor" Value="White"/>
+            </Style>
+            <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
+        </ResourceDictionary>
+    </Shell.Resources>
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior Command="{Binding BackCommand}"
+                            IconOverride="back_icon.png" />
+    </Shell.BackButtonBehavior>
+
+    <Shell.FlyoutHeader>
+        <global:FlyoutContent />
+    </Shell.FlyoutHeader>
+
+    <ShellContent ContentTemplate="{DataTemplate global:Loading}" />
+
+    <MenuItem Text="Logout" StyleClass="MenuItemLayoutStyle" Clicked="OnMenuItemClicked">
+    </MenuItem>
+    
+    <TabBar>
+        <Tab Title="Pratices" Icon="target_with_arrow.png">
+            <ShellContent Route="home" Shell.NavBarIsVisible="true" ContentTemplate="{DataTemplate global:HomePage}" />
+        </Tab>
+        <Tab Title="Competitions" Icon="trophy.png">
+            <ShellContent Route="competitions" Shell.NavBarIsVisible="true" ContentTemplate="{DataTemplate global:HomePage}" />
+        </Tab>
+        <Tab Title="Friends" Icon="history_icon.png">
+            <ShellContent Route="friends" Shell.NavBarIsVisible="true" ContentTemplate="{DataTemplate global:HomePage}" />
+        </Tab>
+    </TabBar>
+
+    <ShellContent Shell.NavBarIsVisible="false" Route="login" ContentTemplate="{DataTemplate account:LoginPage}" />
+</Shell>

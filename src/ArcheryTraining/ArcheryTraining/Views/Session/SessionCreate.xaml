@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ArcheryTraining.Views.Session.SessionCreate"
+             Title="New pratice">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" Order="Primary" Priority="0" Command="{Binding SaveCommand, Mode=TwoWay}" />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout Margin="20,10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="3" />
+                </Grid.RowDefinitions>
+                <Label FontSize="Title" Text="New Practice" />
+                <ContentView BackgroundColor="#007aff" Grid.Row="1" WidthRequest="80" HorizontalOptions="Start"  />
+            </Grid>
+            <StackLayout Margin="0,20,0,0">
+                <StackLayout Margin="0,10">
+                    <Label Text="Practice date" />
+                    <DatePicker Margin="20,0,20,0" Date="{Binding Date, Mode=TwoWay}" />
+                </StackLayout>
+                <StackLayout Margin="0,10">
+                    <Label Text="Practice" />
+                    <Picker Margin="20,0,20,0" SelectedItem="{Binding Area, Mode=TwoWay}" Title="Type" ItemsSource="{Binding SessionArea}" />
+                </StackLayout>
+                <StackLayout Margin="0,10">
+                    <Label Text="Distance" />
+                    <Picker Margin="20,0,20,0" SelectedItem="{Binding SelectedDistance, Mode=TwoWay}" Title="Select distance" ItemsSource="{Binding Distance}" />
+                </StackLayout>
+                <StackLayout Margin="0,10">
+                    <Label Text="Type" />
+                    <Picker Margin="20,0,20,0" SelectedItem="{Binding Type, Mode=TwoWay}" Title="Select type" ItemsSource="{Binding SessionType}" />
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
